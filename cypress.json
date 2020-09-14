@@ -1,4 +1,5 @@
 {
   "video": false,
-  "projectId": "jfkbb1"
+  "projectId": "jfkbb1",
+  "retries": 2
 }
