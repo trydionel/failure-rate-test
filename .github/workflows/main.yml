@@ -12,9 +12,16 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      name:
+        description: 'Environment'
+        required: true
+        default: 'staging'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  environment: ${{ github.event.inputs.name }}
+  
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
