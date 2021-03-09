@@ -1,38 +1,55 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: staging
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
+  #   push:
+  #     branches: [ master ]
+  #   pull_request:
+  #     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Environment'
-        required: true
-        default: 'staging'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # Configurable environment
-  environment: ${{ github.event.inputs.environment }}
-  
+  environment: staging
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    
+
     # Run multiple groups
     strategy:
       fail-fast: false
       matrix:
-        group: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        group:
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+          ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -47,7 +64,7 @@ jobs:
           # Sends test results to Cypress Dashboard
           record: true
           parallel: true
-          group: 'group-${{ matrix.group }}'
+          group: "group-${{ matrix.group }}"
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
